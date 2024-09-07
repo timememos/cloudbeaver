@@ -41,7 +41,15 @@ jobs:
       - name: Clone dbeaver/dbeaver
         id: clone-repo
         run: |
-          git clone -b ${{ env.pr_branch }} https://github.com/dbeaver/dbeaver.git ../dbeaver || git clone -b ${{ env.base_branch }} https://github.com/dbeaver/dbeaver.git ../dbeaver
+          git clone https://github.com/dbeaver/dbeaver.git ../dbeaver
+          cd ../dbeaver
+          if git rev-parse --verify origin/${{ env.pr_branch }} &>/dev/null; then
+            git checkout origin/${{ env.pr_branch }}
+          elif git rev-parse --verify origin/${{ env.base_branch }} &>/dev/null; then
+            git checkout origin/${{ env.base_branch }}
+          else
+            echo "Neither PR branch nor base branch found, using default branch"
+          fi
 
       - name: Run build script
         run: ./build-backend.sh
