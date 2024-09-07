@@ -5,6 +5,7 @@ MAINTAINER DBeaver Corp, devops@dbeaver.com
 COPY cloudbeaver /opt/cloudbeaver
 
 EXPOSE 8978
-RUN find /opt/cloudbeaver -type d -exec chmod 775 {} \;
+RUN find /opt/cloudbeaver -type d -exec chmod 775 {} \; && \
+    chmod +x /opt/cloudbeaver/run-server.sh
 WORKDIR /opt/cloudbeaver/
 ENTRYPOINT ["./run-server.sh"]
