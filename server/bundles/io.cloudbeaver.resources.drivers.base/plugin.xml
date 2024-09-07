@@ -60,7 +60,7 @@
         <driver id="generic:trino_jdbc"/>
         <driver id="generic:duckdb_jdbc"/>
         <driver id="generic:kyuubi_hive"/>
-        <driver id="generic:gaussdb_jdbc"/>
+        <driver id="gaussdb:gaussdb-jdbc"/>
     </extension>
 
 </plugin>
